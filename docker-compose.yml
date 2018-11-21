@@ -1,0 +1,15 @@
+version: '3'
+services:
+ zookeeper:
+  image: samplekafka:1.0
+  command: sh /kafka_2.11-1.0.0/bin/zookeeper-server-start.sh  /kafka_2.11-1.0.0/config/zookeeper.properties
+  ports:
+   - "2181:2181"
+
+ kafka:
+  image: samplekafka:1.0
+  command: sh /kafka_2.11-1.0.0/bin/kafka-server-start.sh  /kafka_2.11-1.0.0/config/server.properties
+  links:
+   - "zookeeper"
+  ports:
+   - "9092:9092"
